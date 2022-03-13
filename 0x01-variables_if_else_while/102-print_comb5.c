@@ -1,52 +1,34 @@
-#include <stdlib.h>
-#include <time.h>
 #include <stdio.h>
 
-/* betty style doc for function main goes there */
 /**
  * main - Entry point
- *
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-	int i, j, k, l;
+	int number1;
+	int number2;
 
-	i = j = k = 48; l = 49;
-	while  ((i < 58))
+	for (number1 = 0; number1 <= 99; number1++)
 	{
-		putchar(i); putchar(j); putchar(32); putchar(k); putchar(l);
-		if ((i == 57) && (j == 56) && (k == 57) && (l == 57))
+		for (number2 = 0; number2 <= 99; number2++)
 		{
-			putchar('\n'); i++;
-		}
-		else
-		{
-			putchar(44); putchar(32);
-			if ((k == 57) && (l == 57))
+			if (number1 < number2)
 			{
-				if (j < 56)
+				putchar ((number1 / 10) + 48);
+				putchar ((number1 % 10) + 48);
+				putchar (' ');
+				putchar ((number2 / 10) + 48);
+				putchar ((number2 % 10) + 48);
+
+				if (number1 != 98 || number2 != 99)
 				{
-					l = ++j + 1; k = i;
+					putchar (',');
+					putchar (' ');
 				}
-				else if (j == 56)
-				{
-					j++; k = i + 1; l = 48;
-				}
-				else if (j == 57)
-				{
-					j = 48; l = 49; k = ++i;
-				}
-			}
-			else if (l < 57)
-			{
-				l++;
-			}
-			else
-			{
-				l = 48; k++;
 			}
 		}
 	}
+	putchar ('\n');
 	return (0);
 }
