@@ -1,36 +1,30 @@
+
 #include <stdio.h>
 
 /**
- * main - prints the first 50 Fibonacci numbers,
- * followed by a new line
- * Return: void.
+ * main - natural numbers multiples of 3 or 5 to 1024
+ *
+ * Return: always 0
  */
+
 int main(void)
 {
-	long int i;
-	long int x;
-	long int y;
-	long int z;
+	int s, t, f, tm, fm;
 
-	x = 0;
-
-	y = 1;
-
-	for (i = 0; i < 50; i++)
+	s = 0;
+	for (t = 0; t <= (1024 / 3); t++)
 	{
-		z = y + x;
-
-		if (i != 49)
-		{
-			printf("%ld, ", z);
-		}
-		else
-		{
-			printf("%ld\n", z);
-		}
-
-		x = y;
-		y = z;
+		tm = 3 * t;
+		s = s + tm;
 	}
+	for (f = 0; f <= (1024 / 5); f++)
+	{
+		if (!(f % 3 == 0))
+		{
+			fm = 5 * f;
+			s = s + fm;
+		}
+	}
+	printf("%i\n", s);
 	return (0);
 }
