@@ -2,72 +2,60 @@
 #include <stdio.h>
 
 /**
-* printit - a helper function
-* @c: a character to see fi it is printable
-*
-* Description: checks the character
-* Return: a 1 or 0 for true or false
-*/
-int printit(char c)
+ * print_line - prints a s bytes of a buffer
+ * @c: buffer to print
+ * @s: bytes of buffer to print
+ * @l: line of buffer to print
+ *
+ * Return: void
+ */
+
+void print_line(char *c, int s, int l)
 {
-	if ((c < 32 && c >= 0) || c > 126)
-		return (0);
-	return (1);
+	int j, k;
+
+	for (j = 0; j <= 9; j++)
+	{
+		if (j <= s)
+			printf("%02x", c[l * 10 + j]);
+		else
+			printf("  ");
+		if (j % 2)
+			putchar(' ');
+	}
+	for (k = 0; k <= s; k++)
+	{
+		if (c[l * 10 + k] > 31 && c[l * 10 + k] < 127)
+			putchar(c[l * 10 + k]);
+		else
+			putchar('.');
+	}
 }
 
 /**
-* print_buffer - a function that prints a buffer
-* @b: a char pointer given by main that represents a string
-* @size: a size of bytes given by main
-*
-* Description: lots of formatting and stuff to do in this one
-* Return: is void
-*/
-
+ * print_buffer - prints a buffer
+ * @b: buffer to print
+ * @size: size of buffer
+ *
+ * Return: void
+ */
 void print_buffer(char *b, int size)
 {
-	int s1 = size;
-	int s2 = size;
-	char *ptr1 = b;
-	char *ptr2 = b;
-	int i = 0;
-	int j = 0;
-	int k = 0;
+	int i;
 
-	if (size <= 0)
-		printf("\n");
-	while (size > 0)
+	for (i = 0; i <= (size - 1) / 10 && size; i++)
 	{
-		size -= 10;
-		printf("%08x: ", 10 * k);
-		k++;
-		for (i = 0; i < 5; i++)
+		printf("%08x: ", i * 10);
+		if (i < size / 10)
 		{
-			for (j = 0; j < 2; j++)
-			{
-				if (s1 == 0)
-					printf("  ");
-				if (s1 > 0)
-				{
-					printf("%02x", *ptr1);
-					s1--;
-					ptr1++;
-				}
-			}
-				putchar(' ');
+			print_line(b, 9, i);
 		}
-		for (i = 0; i < 10; i++)
+		else
 		{
-			if (s2 > 0)
-			{
-				if (printit(*ptr2))
-					printf("%c", *ptr2);
-				else
-					putchar('.');
-				s2--;
-				ptr2++;
-			}
+			print_line(b, size % 10 - 1, i);
 		}
-	printf("\n");
+		putchar('\n');
 	}
+	if (size == 0)
+		putchar('\n');
 }
